@@ -1,17 +1,15 @@
 import asyncio
-from telethon import TelegramClient
+import telegram # Librería: python-telegram-bot
 
-# --- TUS CREDENCIALES ---
-api_id = 35150197
-api_hash = '2ced9d56993f07f4ce2ccb13e2258b81'
+# --- TUS DATOS ---
+# Token del bot (asegúrate de que este es el Token de SENTINEL CHK)
+TOKEN = '8563684051:AAEAtt8RlQ3fi13UDxmzqPId2b3AEQpy-I' 
 
-# --- TU NÚMERO ---
-phone_number = '+50582269592' 
+# ID del chat usando el handle del grupo que has confirmado
+CHAT_ID = '@AnubisCHK'
 
-# --- EL GRUPO DESTINO ---
-target_group = 'https://t.me/cardingkicks'
-
-# --- EL MENSAJE DE VENTA ---
+# --- MENSAJE DE VENTA ---
+# (El contenido se mantuvo igual que en el código anterior)
 MENSAJE = """@SentinelChksBot
 Precios planes.
 
@@ -32,31 +30,23 @@ Precios planes.
 • Asistencia 24/7 incluido en todos los planes! ✅
 • Scrapper premium✅"""
 
-async def main():
-    print(f"Conectando con el número {phone_number}...")
-    client = TelegramClient('anon_session', api_id, api_hash)
+async def enviar_mensaje():
+    print("Iniciando Bot API para @AnubisCHK...")
+    bot = telegram.Bot(token=TOKEN)
     
-    # Iniciar sesión
-    await client.start(phone_number)
-    print("✅ ¡Conectado exitosamente!")
-
     while True:
         try:
-            print(f"Enviando mensaje a: {target_group}")
-            await client.send_message(target_group, MENSAJE)
-            print("✅ Mensaje enviado.")
+            # Enviar el mensaje al handle del grupo
+            await bot.send_message(chat_id=CHAT_ID, text=MENSAJE)
+            print(f"Mensaje enviado a {CHAT_ID} con éxito.")
             
-            # --- PAUSA DE SEGURIDAD ---
-            # Se mantiene en 300 segundos (5 min) para evitar el ban inmediato
-            # en grupos públicos con protección anti-spam.
-            await asyncio.sleep(300) 
+            # Pausa de 60 segundos (ajusta esto si quieres más tiempo)
+            await asyncio.sleep(60) 
             
         except Exception as e:
-            print(f"❌ Error: {e}")
-            # Si ocurre un error (ej: flood wait), esperar 1 minuto antes de reintentar
-            await asyncio.sleep(60)
+            print(f"Ocurrió un error: {e}")
+            # Esperar 5s si hay un error antes de reintentar
+            await asyncio.sleep(5)
 
 if __name__ == '__main__':
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(main())
+    asyncio.run(enviar_mensaje())
