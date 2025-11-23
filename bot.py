@@ -28,7 +28,8 @@ Precios planes.
 
 • Grupo privado incluido en todos los planes! ✅
 • Asistencia 24/7 incluido en todos los planes! ✅
-• Scrapper premium✅"""
+• Scrapper premium✅
+° seller : @Shadow09_05"""
 
 async def enviar_mensaje():
     print("Iniciando Bot API para @AnubisCHK...")
