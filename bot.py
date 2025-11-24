@@ -42,7 +42,7 @@ async def enviar_mensaje():
             print(f"Mensaje enviado a {CHAT_ID} con éxito.")
             
             # Pausa de 60 segundos (ajusta esto si quieres más tiempo)
-            await asyncio.sleep(60) 
+            await asyncio.sleep(120) 
             
         except Exception as e:
             print(f"Ocurrió un error: {e}")
